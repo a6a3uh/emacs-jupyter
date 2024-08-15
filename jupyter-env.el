@@ -174,6 +174,9 @@ The session can be used to write a connection file, see
         ;; Tell the `jupyter kernel` process to shutdown itself and
         ;; the launched kernel.
         (interrupt-process process)
+	;; fix according to:
+	;; https://github.com/emacs-jupyter/jupyter/issues/464#issuecomment-1937499393
+	(while (process-live-p process))
         ;; Wait until the connection file is cleaned up before
         ;; forgetting about the process completely.
         (jupyter-with-timeout
